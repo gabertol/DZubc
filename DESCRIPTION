@@ -17,3 +17,5 @@ Suggests:
     grid,
     imager,
     tidyr
+URL: https://github.com/gabertol/DZubc
+BugReports: https://github.com/gabertol/DZubc/issues
