@@ -1,5 +1,7 @@
 
 process_image <- function(image_path, name='sample_') {
+  library(EBImage)
+
   image <- imager::load.image(image_path)
 
   # Verify that the image was loaded correctly
