@@ -11,11 +11,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: 
     ggplot2,
-    EBImage
-Suggests: 
+    EBImage,
     dplyr,
     grid,
     imager,
     tidyr
+Suggests: 
 URL: https://github.com/gabertol/DZubc
 BugReports: https://github.com/gabertol/DZubc/issues
