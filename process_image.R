@@ -1,7 +1,24 @@
+#' Process an Image to Extract and Visualize Object Centroids
+#'
+#' This function processes an image to extract the centroids of objects based on their blue channel,
+#' filters the objects based on specific criteria, and generates a plot with the centroids marked.
+#'
+#' @param image_path A string specifying the path to the image file.
+#' @param name A string specifying the prefix for naming samples. Default is 'sample_'.
+#' @return A list containing the plot with centroids marked, the image width and height, and a data frame of valid centroids.
+#' @import imager
+#' @import dplyr
+#' @import EBImage
+#' @import ggplot2
+#' @import grid
+#' @importFrom stats mutate
+#' @export
+#' @examples
+#' result <- process_image("path/to/image.png")
+#' print(result$plot)
+process_image <- function(image_path, name = 'sample_') {
 
-process_image <- function(image_path, name='sample_') {
-  library(EBImage)
-
+  # Load the image
   image <- imager::load.image(image_path)
 
   # Verify that the image was loaded correctly
@@ -9,20 +26,25 @@ process_image <- function(image_path, name='sample_') {
     stop("The image was not loaded correctly.")
   }
 
+  # Extract the blue channel and binarize the image
   blue_channel <- image[,,1,3]
   threshold <- 0.5
   binary_image <- blue_channel > threshold
   binary_image_eb <- as.Image(binary_image)
   labeled_image <- bwlabel(binary_image_eb)
+
+  # Compute object properties
   object_props <- as.data.frame(computeFeatures.moment(labeled_image))
   object_shapes <- as.data.frame(computeFeatures.shape(labeled_image))
 
+  # Filter valid objects
   valid_objects <- cbind(object_props, object_shapes) %>%
     filter(s.radius.mean > 0.5,
            m.majoraxis > 2,
            m.theta != 0,
            s.area > 5)
 
+  # Create a data frame of valid centroids
   valid_centroids <- data.frame(
     id = row_number(valid_objects),
     center_x = valid_objects$m.cx,
@@ -42,12 +64,14 @@ process_image <- function(image_path, name='sample_') {
            angularity = radius_mean / radius_sd,
            ratio = major_axis / minor_axis,
            sample = paste0(name, row_number(.)),
-           center_y=dim(image)[2] - center_y) %>%
+           center_y = dim(image)[2] - center_y) %>%
     arrange(id)
 
+  # Calculate image dimensions
   img_width <- dim(image)[1] / 200
   img_height <- dim(image)[2] / 200
 
+  # Create the plot
   plot <- ggplot() +
     annotation_custom(rasterGrob(as.raster(image), interpolate = TRUE),
                       xmin = 0, xmax = dim(image)[1],
