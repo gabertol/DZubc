@@ -15,33 +15,26 @@
 #' recalculated <- recalculate_centroids(centroids, ref_points_old, ref_points_new)
 #' print(recalculated)
 recalculate_centroids <- function(centroids, ref_points_old, ref_points_new) {
+  # Extraindo coordenadas antigas e novas
+  old_x <- ref_points_old$X
+  old_y <- ref_points_old$Y
+  new_x <- ref_points_new$X
+  new_y <- ref_points_new$Y
 
-  # Matrix of old reference points
-  old_points <- as.matrix(ref_points_old %>% select(ref_x, ref_y))
-  old_points <- cbind(old_points, 1)  # Add column of 1s for affine transformation
+  # Calculando as transformações de escala e translação
+  scale_x <- (new_x[2] - new_x[1]) / (old_x[2] - old_x[1])
+  scale_y <- (new_y[2] - new_y[1]) / (old_y[2] - old_y[1])
+  trans_x <- new_x[1] - scale_x * old_x[1]
+  trans_y <- new_y[1] - scale_y * old_y[1]
 
-  # Matrix of new reference points
-  new_points <- as.matrix(ref_points_new %>% select(X, Y))
+  # Aplicando transformações aos centróides
+  centroids <- centroids %>%
+    mutate(
+      X_new = X * scale_x + trans_x,
+      Y_new = Y * scale_y + trans_y,
+      Z = 0
+    )
 
-  # Calculate the affine transformation using QR decomposition
-  transformation_matrix <- qr.solve(old_points, new_points)
-
-  # Apply the affine transformation
-  centroids_matrix <- as.matrix(centroids %>% select(center_x, center_y))
-  centroids_matrix <- cbind(centroids_matrix, 1)  # Add column of 1s
-  transformed_centroids <- centroids_matrix %*% transformation_matrix
-
-  # Convert matrix back to data frame
-  transformed_centroids <- as.data.frame(transformed_centroids)
-  names(transformed_centroids) <- c("X", "Y")
-  transformed_centroids$id <- centroids$id
-
-  # Recalculate Z using the transformation of the Z points
-  old_z <- ref_points_old$ref_z
-  new_z <- ref_points_new$Z
-  scale_z <- mean(new_z / old_z)
-
-  transformed_centroids$Z <- centroids$center_z * scale_z
-
-  return(transformed_centroids)
+  return(centroids)
 }
+
