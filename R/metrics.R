@@ -16,16 +16,16 @@
 #' print(plot)
 
 
-metrics <- function(file,scale) {
+metrics <- function(file,scale=1,angle_cor=0) {
 
   processed_data <- file %>%
-    mutate(across(.cols %in% c(area:radius_min,perimeter,eccentricity,minor_axis),~.x * scale )) %>%
     mutate(r = row_number()) %>%
     arrange(r) %>%
     dplyr::select(sample, everything(), -r) %>%
     mutate(ratio2 = radius_max / radius_min,
-           angle2 = ifelse(angle > 0, angle / (pi / 360), 360 - (-angle) / (pi / 360))) %>%
+           angle2 = ifelse(angle > 0, angle / (pi / 360), 360 - (-angle) / (pi / 360))+angle_cor) %>%
     filter(area < 8000, area > 5) %>%
+    mutate(across(.cols %in% c(area:radius_min,perimeter,eccentricity,minor_axis),~.x * scale )) %>%
     select(-center_z, -center_x, -center_y, -id) %>%
     pivot_longer(cols = 2:length(.))
 
