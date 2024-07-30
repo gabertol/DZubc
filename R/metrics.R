@@ -3,6 +3,7 @@
 #' This function calculates additional metrics from a data frame, filters the data, and creates histograms of the metrics.
 #'
 #' @param file A data frame containing the data to be processed.
+#' @param scale a scale factor from georeference_image function.
 #' @return A ggplot object with histograms of the calculated metrics.
 #' @import dplyr
 #' @import tidyr
@@ -13,9 +14,12 @@
 #'                  angle = c(0.5, -0.5), area = c(500, 10000))
 #' plot <- metrics(df)
 #' print(plot)
-metrics <- function(file) {
+
+
+metrics <- function(file,scale) {
 
   processed_data <- file %>%
+    mutate(across(.cols %in% c(area:radius_min,perimeter,eccentricity,minor_axis),~.x * scale )) %>%
     mutate(r = row_number()) %>%
     arrange(r) %>%
     dplyr::select(sample, everything(), -r) %>%

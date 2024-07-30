@@ -21,10 +21,6 @@ process_image <- function(image_path, name = 'sample_') {
   # Load the image
   image <- imager::load.image(image_path)
 
-  # Verify that the image was loaded correctly
-  if (is.null(dim(image))) {
-    stop("The image was not loaded correctly.")
-  }
 
   # Extract the blue channel and binarize the image
   blue_channel <- image[,,1,3]
@@ -32,6 +28,8 @@ process_image <- function(image_path, name = 'sample_') {
   binary_image <- blue_channel > threshold
   binary_image_eb <- as.Image(binary_image)
   labeled_image <- bwlabel(binary_image_eb)
+
+
 
   # Compute object properties
   object_props <- as.data.frame(computeFeatures.moment(labeled_image))
@@ -77,7 +75,7 @@ process_image <- function(image_path, name = 'sample_') {
                       xmin = 0, xmax = dim(image)[1],
                       ymin = 0, ymax = dim(image)[2]) +
     geom_point(data = valid_centroids, aes(x = center_x, y = center_y),
-               color = "red", size = 0.8) +
+               color = "red", size = 0.6) +
     geom_text(data = valid_centroids, aes(x = center_x, y = center_y, label = id),
               color = "red", size = 2, vjust = -1) +
     theme_void() +
