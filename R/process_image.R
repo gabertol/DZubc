@@ -11,7 +11,6 @@
 #' @import EBImage
 #' @import ggplot2
 #' @import grid
-#' @importFrom stats mutate
 #' @export
 #' @examples
 #' result <- process_image("path/to/image.png")

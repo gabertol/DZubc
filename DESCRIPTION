@@ -1,11 +1,10 @@
 Package: DZubc
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Detrital Zircon tools from University of British Columbia
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Gabriel Bertolini
+Maintainer: Gabriel Bertolini <g.bertolini@ubc.ca>
+Description: Tools for SEM images as (1) centroids of zircons (image analysis); (2) transformation of centroids to other reference tools based in 3 tie points; (3) metrics of the interest points like major/minor axis, area, eccentricity,perimeter, radius, angle.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
@@ -19,3 +18,5 @@ Imports:
 Suggests: 
 URL: https://github.com/gabertol/DZubc
 BugReports: https://github.com/gabertol/DZubc/issues
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
