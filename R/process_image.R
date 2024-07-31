@@ -62,7 +62,8 @@ process_image <- function(image_path, name = 'sample_') {
            angularity = radius_mean / radius_sd,
            ratio = major_axis / minor_axis,
            sample = paste0(name, row_number(.)),
-           center_y = dim(image)[2] - center_y) %>%
+           center_y = dim(image)[2] - center_y,
+           Name=paste0(name,'_',id)) %>%
     arrange(id)
 
   # Calculate image dimensions

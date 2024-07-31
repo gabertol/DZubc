@@ -6,3 +6,5 @@
 .httr-oauth
 .DS_Store
 .quarto
+test_shiny.R
+manual_test.qmd
