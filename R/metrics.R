@@ -29,19 +29,10 @@ metrics <- function(file,scale=1,angle_cor=0) {
     select(-center_z, -center_x, -center_y, -id) %>%
     pivot_longer(cols = 2:length(.))
 
-  # Calcular valores médios para cada variável
-  means <- processed_data %>%
-    group_by(name) %>%
-    summarize(mean_value = mean(value, na.rm = TRUE))
-
-  # Criação do plot
   plot <- processed_data %>%
     ggplot(aes(x = value)) +
     geom_histogram() +
-    facet_wrap(~name, scales = "free") +
-    geom_vline(data = means, aes(xintercept = mean_value), color = "red", linetype = "dashed") +
-    geom_text(data = means, aes(x = mean_value, y = 0, label = round(mean_value, 2)),
-              color = "red", vjust = -0.5, hjust = -0.5, angle = 90)
+    facet_wrap(~name, scales = "free")
 
   return(plot)
 
