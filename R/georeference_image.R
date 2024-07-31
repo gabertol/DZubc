@@ -46,23 +46,7 @@ georeference_image <- function(ref_points_image, ref_points_world) {
   return(list(transform_matrix = transform_matrix, scale_x = scale_x, scale_y = scale_y, scale = scale, angle = angle))
 }
 
-#' Calculate Affine Transform
-#'
-#' This function calculates the affine transformation matrix given source and destination points.
-#'
-#' @param src A matrix of source points. Each row should represent a point (x, y).
-#' @param dst A matrix of destination points. Each row should represent a point (x, y).
-#'
-#' @return A matrix representing the affine transformation.
-#'
-#' @examples
-#' # Example usage:
-#' src <- matrix(c(10, 20, 30, 40, 50, 60), ncol = 2, byrow = TRUE)
-#' dst <- matrix(c(100, 200, 300, 400, 500, 600), ncol = 2, byrow = TRUE)
-#' transform <- calculate_affine_transform(src, dst)
-#' print(transform)
-#'
-#' @export
+
 calculate_affine_transform <- function(src, dst) {
   A <- matrix(c(src[1,], 1, src[2,], 1, src[3,], 1), nrow = 3, byrow = TRUE)
   B <- matrix(c(dst[1,], dst[2,], dst[3,]), nrow = 3, byrow = TRUE)
