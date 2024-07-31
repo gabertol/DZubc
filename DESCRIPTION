@@ -8,13 +8,14 @@ Description: Tools for SEM images as (1) centroids of zircons (image analysis); 
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
-Requirements: 
+Imports: 
     ggplot2,
     EBImage,
     dplyr,
     grid,
     imager,
     tidyr
+Warning: false
 URL: https://github.com/gabertol/DZubc
 BugReports: https://github.com/gabertol/DZubc/issues
 Roxygen: list(markdown = TRUE)
