@@ -55,16 +55,3 @@ calculate_affine_transform <- function(src, dst) {
 }
 
 
-apply_affine_transform <- function(points, transform_matrix) {
-  # Adicionar uma coluna de 1s para a transformação afim
-  points <- cbind(points, 1)
-
-  # Aplicar a transformação afim
-  transformed <- points %*% transform_matrix
-
-  # Remover a coluna de 1s
-  transformed_points <- data.frame(X=transformed[, 1],
-                                   Y=transformed[, 2])
-
-  return(transformed_points)
-}
