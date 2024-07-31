@@ -46,12 +46,3 @@ georeference_image <- function(ref_points_image, ref_points_world) {
   return(list(transform_matrix = transform_matrix, scale_x = scale_x, scale_y = scale_y, scale = scale, angle = angle))
 }
 
-
-calculate_affine_transform <- function(src, dst) {
-  A <- matrix(c(src[1,], 1, src[2,], 1, src[3,], 1), nrow = 3, byrow = TRUE)
-  B <- matrix(c(dst[1,], dst[2,], dst[3,]), nrow = 3, byrow = TRUE)
-  transform <- solve(A, B)
-  return(transform)
-}
-
-
