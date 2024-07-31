@@ -25,7 +25,7 @@ process_image <- function(image_path, name = 'sample_') {
   blue_channel <- image[,,1,3]
   threshold <- 0.5
   binary_image <- blue_channel > threshold
-  binary_image_eb <- as.Image(binary_image)
+  binary_image_eb <- EBImage::as.Image(binary_image)
   labeled_image <- bwlabel(binary_image_eb)
 
 
