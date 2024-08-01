@@ -6,11 +6,12 @@
 #' @param image_path A string specifying the path to the image file.
 #' @param name A string specifying the prefix for naming samples. Default is 'sample_'.
 #' @return A list containing the plot with centroids marked, the image width and height, and a data frame of valid centroids.
-#' @import imager
 #' @import dplyr
-#' @import EBImage
 #' @import ggplot2
-#' @import grid
+#' @import EBImage
+#' @importFrom grid rasterGrob
+#' @importFrom imager load.image
+#' @importFrom grDevices as.raster
 #' @export
 #' @examples
 #' result <- process_image("path/to/image.png")
@@ -18,14 +19,14 @@
 process_image <- function(image_path, name = 'sample_') {
 
   # Load the image
-  image <- imager::load.image(image_path)
+  image <- load.image(image_path)
 
 
   # Extract the blue channel and binarize the image
   blue_channel <- image[,,1,3]
   threshold <- 0.5
   binary_image <- blue_channel > threshold
-  binary_image_eb <- EBImage::as.Image(binary_image)
+  binary_image_eb <- as.Image(binary_image)
   labeled_image <- bwlabel(binary_image_eb)
 
 
@@ -71,13 +72,13 @@ process_image <- function(image_path, name = 'sample_') {
 
   # Create the plot
   plot <- ggplot() +
-    annotation_custom(rasterGrob(as.raster(image), interpolate = TRUE),
+    annotation_custom(grid::rasterGrob(as.raster(image), interpolate = TRUE),
                       xmin = 0, xmax = dim(image)[1],
                       ymin = 0, ymax = dim(image)[2]) +
     geom_point(data = valid_centroids, aes(x = center_x, y = center_y),
                color = "red", size = 0.6) +
     geom_text(data = valid_centroids, aes(x = center_x, y = center_y, label = id),
-              color = "red", size = 2, vjust = -1) +
+              color = "red", size = 1.5, vjust = -1) +
     theme_void() +
     coord_fixed(ratio = 1, xlim = c(0, dim(image)[1]), ylim = c(0, dim(image)[2]), expand = FALSE)
 

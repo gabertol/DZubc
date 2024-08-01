@@ -4,6 +4,7 @@
 #'
 #' @param file A data frame containing the data to be processed.
 #' @param scale a scale factor from georeference_image function.
+#' @param angle_cor Angle of the object to correct the directions
 #' @return A ggplot object with histograms of the calculated metrics.
 #' @import dplyr
 #' @import tidyr

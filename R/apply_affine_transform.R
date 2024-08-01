@@ -7,9 +7,11 @@
 #' @return A data frame with the transformed coordinates (X, Y).
 #' @export
 #' @examples
-#' points <- data.frame(X = c(1, 2, 3), Y = c(4, 5, 6))
-#' transform_matrix <- matrix(c(1, 0, 0, 0, 1, 0, 1, 1, 1), nrow = 3, byrow = TRUE)
-#' apply_affine_transform(points, transform_matrix)
+#' ICP_coordinates<-data.frame(X=c(16.1990,22.884,14.9028),Y=c(84.7310,79.9283,80.9070)) %>% as.matrix()
+#' IMAGE_coordinates<-data.frame(X=c(2085.685,1375.439,2909.453 ),Y=c(2846.163,1508.357,2023.621)) %>% as.matrix()
+#' transform_matrix <- georeference_image(ICP_coordinates, IMAGE_coordinates)
+#' FULL_IMAGE_COORDINATES<-data.frame(X=seq(1500,2500,by=50),Y=seq(1500,2500,by=50))
+#' apply_affine_transform(FULL_IMAGE_COORDINATES, transform_matrix)
 apply_affine_transform <- function(points, transform_matrix) {
   # Add a column of 1s for the affine transformation
   points <- cbind(points, 1)

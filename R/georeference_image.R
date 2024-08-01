@@ -17,9 +17,9 @@
 #'
 #' @examples
 #' # Example usage:
-#' ref_points_image <- matrix(c(10, 20, 30, 40, 50, 60), ncol = 2, byrow = TRUE)
-#' ref_points_world <- matrix(c(100, 200, 300, 400, 500, 600), ncol = 2, byrow = TRUE)
-#' result <- georeference_image(ref_points_image, ref_points_world)
+#' ICP_coordinates<-data.frame(X=c(16.1990,22.884,14.9028),Y=c(84.7310,79.9283,80.9070)) %>% as.matrix()
+#' IMAGE_coordinates<-data.frame(X=c(2085.685,1375.439,2909.453 ),Y=c(2846.163,1508.357,2023.621)) %>% as.matrix()
+#' result <- georeference_image(ICP_coordinates, IMAGE_coordinates)
 #' print(result)
 #'
 #' @export
@@ -28,11 +28,6 @@ georeference_image <- function(ref_points_image, ref_points_world) {
   # Converter para matrizes numéricas
   ref_points_image <- as.matrix(ref_points_image)
   ref_points_world <- as.matrix(ref_points_world)
-
-  # Verificar se as matrizes são numéricas
-  if (!is.numeric(ref_points_image) || !is.numeric(ref_points_world)) {
-    stop("'ref_points_image' e 'ref_points_world' devem ser matrizes numéricas.")
-  }
 
   # Calcular a matriz de transformação afim
   transform_matrix <- calculate_affine_transform(ref_points_image, ref_points_world)

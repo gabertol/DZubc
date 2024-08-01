@@ -10,6 +10,8 @@ metrics(file, scale = 1, angle_cor = 0)
 \item{file}{A data frame containing the data to be processed.}
 
 \item{scale}{a scale factor from georeference_image function.}
+
+\item{angle_cor}{Angle of the object to correct the directions}
 }
 \value{
 A ggplot object with histograms of the calculated metrics.
