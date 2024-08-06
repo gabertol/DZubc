@@ -8,3 +8,4 @@
 .quarto
 test_shiny.R
 manual_test.qmd
+tests/

@@ -32,7 +32,7 @@ metrics <- function(file,scale=1,angle_cor=0) {
 
   plot <- processed_data %>%
     ggplot(aes(x = value)) +
-    geom_histogram() +
+    geom_histogram()+
     facet_wrap(~name, scales = "free")
 
   return(plot)
