@@ -11,11 +11,8 @@
 #' @import ggplot2
 #' @export
 #' @examples
-#' df <- data.frame(sample = c('sample_1', 'sample_2'), radius_max = c(10, 20), radius_min = c(2, 5),
-#'                  angle = c(0.5, -0.5), area = c(500, 10000))
-#' plot <- metrics(df)
-#' print(plot)
-
+#'df <- data.frame(sample = c('sample_1', 'sample_2'),Name=c("A","B"), radius_max = c(10, 20), radius_min = c(2, 5),angle = c(0.5, -0.5), perimeter=c(10,2),area = c(500, 10000),eccentricity=c(2,1.3),minor_axis=c(0.1,0.2),center_z=c(0,0), center_x=c(1000,1000), center_y=c(0,0),id=c(1,2))
+#'metrics(df)
 
 metrics <- function(file,scale=1,angle_cor=0) {
 

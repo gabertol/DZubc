@@ -19,7 +19,9 @@ This function calculates the affine transformation matrix that maps a set of sou
 }
 \examples{
 
-src <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3, byrow = TRUE)
-dst <- matrix(c(7, 8, 9, 10, 11, 12), nrow = 3, byrow = TRUE)
+src<- matrix(c(16.1990,22.884,14.9028,84.7310,79.9283,80.9070),nrow=3)
+
+dst<- matrix(c(2085.685,1375.439,2909.453,2846.163,1508.357,2023.621),nrow=3)
+
 calculate_affine_transform(src, dst)
 }

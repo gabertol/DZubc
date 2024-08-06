@@ -9,12 +9,14 @@
 #' @import dplyr
 #' @import ggplot2
 #' @import EBImage
-#' @importFrom grid rasterGrob
-#' @importFrom imager load.image
-#' @importFrom grDevices as.raster
+#' @import grid
+#' @import imager
+#' @import grDevices
 #' @export
 #' @examples
-#' result <- process_image("path/to/image.png")
+#' img_path <- system.file("extdata", "zircon.png", package = "DZubc")
+#' result <- process_image(img_path)
+#'
 #' print(result$plot)
 process_image <- function(image_path, name = 'sample_') {
 

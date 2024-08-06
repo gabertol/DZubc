@@ -18,9 +18,13 @@ A data frame with the transformed coordinates (X, Y).
 This function applies an affine transformation to a set of points using a given transformation matrix.
 }
 \examples{
-ICP_coordinates<-data.frame(X=c(16.1990,22.884,14.9028),Y=c(84.7310,79.9283,80.9070)) \%>\% as.matrix()
-IMAGE_coordinates<-data.frame(X=c(2085.685,1375.439,2909.453 ),Y=c(2846.163,1508.357,2023.621)) \%>\% as.matrix()
+ICP_coordinates<- matrix(c(16.1990,22.884,14.9028,84.7310,79.9283,80.9070),nrow=3)
+
+IMAGE_coordinates<- matrix(c(2085.685,1375.439,2909.453,2846.163,1508.357,2023.621),nrow=3)
+
 transform_matrix <- georeference_image(ICP_coordinates, IMAGE_coordinates)
-FULL_IMAGE_COORDINATES<-data.frame(X=seq(1500,2500,by=50),Y=seq(1500,2500,by=50))
-apply_affine_transform(FULL_IMAGE_COORDINATES, transform_matrix)
+
+FULL_IMAGE_COORDINATES<-matrix(c(seq(1500,2500,by=50),Y=seq(1750,2750,by=50)),nrow=21)
+
+apply_affine_transform(FULL_IMAGE_COORDINATES, transform_matrix$transform_matrix)
 }

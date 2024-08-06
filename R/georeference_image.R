@@ -17,8 +17,10 @@
 #'
 #' @examples
 #' # Example usage:
-#' ICP_coordinates<-data.frame(X=c(16.1990,22.884,14.9028),Y=c(84.7310,79.9283,80.9070)) %>% as.matrix()
-#' IMAGE_coordinates<-data.frame(X=c(2085.685,1375.439,2909.453 ),Y=c(2846.163,1508.357,2023.621)) %>% as.matrix()
+#' ICP_coordinates<- matrix(c(16.1990,22.884,14.9028,84.7310,79.9283,80.9070),nrow=3)
+#'
+#' IMAGE_coordinates<- matrix(c(2085.685,1375.439,2909.453,2846.163,1508.357,2023.621),nrow=3)
+#'
 #' result <- georeference_image(ICP_coordinates, IMAGE_coordinates)
 #' print(result)
 #'

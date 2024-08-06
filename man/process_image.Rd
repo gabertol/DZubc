@@ -19,6 +19,8 @@ This function processes an image to extract the centroids of objects based on th
 filters the objects based on specific criteria, and generates a plot with the centroids marked.
 }
 \examples{
-result <- process_image("path/to/image.png")
+img_path <- system.file("extdata", "zircon.png", package = "DZubc")
+result <- process_image(img_path)
+
 print(result$plot)
 }
