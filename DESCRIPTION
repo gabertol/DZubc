@@ -15,7 +15,8 @@ Imports:
     EBImage,
     imager,
     grDevices,
-    grid
+    grid,
+    shiny
 URL: https://github.com/gabertol/DZubc
 BugReports: https://github.com/gabertol/DZubc/issues
 Roxygen: list(markdown = TRUE)
